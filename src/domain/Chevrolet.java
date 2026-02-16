@@ -10,10 +10,7 @@ package domain;
  * Aqui vou deixar o carro como objeto
  * Vantagens:
 
-✅ Uma única tabela e um único DAO
-✅ Fácil consultar todos os carros
-✅ Flexível para adicionar novos tipos
-✅ Mantém princípios OO (polimorfismo)
+
  */
 public class Chevrolet extends AbstractCar {
        
@@ -21,7 +18,11 @@ public class Chevrolet extends AbstractCar {
         super(licensePlate, model, Year, km);
     }
     
-    protected getCar()
+    @Override
+    public String getBrand(){
+        String brand = "Chevrolet";
+        return brand;
+    }
        
        
     

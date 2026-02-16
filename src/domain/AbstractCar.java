@@ -18,7 +18,12 @@ public abstract class AbstractCar {
         protected     float    km;
         
         //Here I made that because one class of some brand can`t set another brand
-        protected abstract String getCar();
+        protected abstract String getBrand();
+        
+        //template method
+        public final void CarInfo(){
+            printBasicInfo();
+        }
         
         public AbstractCar(Long licensePlate, String model, int Year, float km){
 
@@ -26,6 +31,15 @@ public abstract class AbstractCar {
             this.model          = model;
             this.year           = year;
             this.km             = km;
+        }
+        
+        protected void printBasicInfo(){
+            System.out.println("Marca: " + getBrand());
+            System.out.println("Modelo: " + getModel());
+            System.out.println("Ano: " + getYear());
+            System.out.println("Placa: " + getLicensePlate());
+            System.out.println("Km: " + getKm());
+            
         }
 
         public Long getLicensePlate() {
