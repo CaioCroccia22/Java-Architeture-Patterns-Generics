@@ -14,7 +14,7 @@ package domain;
  */
 public class Chevrolet extends AbstractCar {
        
-    public Chevrolet(Long licensePlate, String model, int Year, float km) {
+    public Chevrolet(String licensePlate, String model, int Year, float km) {
         super(licensePlate, model, Year, km);
     }
     

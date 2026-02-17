@@ -12,7 +12,7 @@ package domain;
  */
 public abstract class AbstractCar {
     
-        protected     Long     licensePlate;
+        protected     String   licensePlate;
         protected     String   model;
         protected     int      year;
         protected     float    km;
@@ -25,7 +25,7 @@ public abstract class AbstractCar {
             printBasicInfo();
         }
         
-        public AbstractCar(Long licensePlate, String model, int Year, float km){
+        public AbstractCar(String licensePlate, String model, int Year, float km){
 
             this.licensePlate   = licensePlate;
             this.model          = model;
@@ -42,7 +42,7 @@ public abstract class AbstractCar {
             
         }
 
-        public Long getLicensePlate() {
+        public String getLicensePlate() {
             return licensePlate;
         }
 
@@ -58,7 +58,7 @@ public abstract class AbstractCar {
             return km;
         }
 
-        public void setLicensePlate(Long licensePlate) {
+        public void setLicensePlate(String licensePlate) {
             this.licensePlate = licensePlate;
         }
 
