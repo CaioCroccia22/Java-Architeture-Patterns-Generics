@@ -8,19 +8,22 @@ import domain.AbstractCar;
 import domain.Chevrolet;
 import java.util.HashMap;
 import java.util.List;
+import java.lang.String;
 import java.util.Map;
 import java.util.Scanner;
 
 /**
  *
  * @author Caio
+ * @param <K>
+ * @param <V>
  */
-public class CarMapDAO<K, V> implements ICarDAO{
-    Map<K, V> mapCar = new HashMap();
-    Scanner scan = new Scanner(System.in);
+//Here Im limiting type to String and AbstractCar to put on the map licensePlate for key
+//and car for value, therefore I can insert all type of car using generics
+public class CarMapDAO<V extends AbstractCar> implements ICarDAO{
 
     @Override
-    public void createCar(Object entity) {
+    public void createCar(T entity) {
         System.out.println("""
                           ╔═══════════════════════════════════════════╗
                           ║  SELECIONE A MARCA DO CARRO          ║
@@ -52,19 +55,32 @@ public class CarMapDAO<K, V> implements ICarDAO{
         
         String licensePlate = getLicensePlate();
         
+        AbstractCar car = null;
+        
         
         switch(brand){
             case 1:
-                AbstractCar car = new Chevrolet(licensePlate, model, year, km);
+                car = new Chevrolet(licensePlate, model, year, km);
+                
+                break;
+            case 2:
+                car = new Honda(licensePlate, model, year, km);
+                
                 break;
         }
+        //Here Im made casting because car need to be especific type of brand, like chevrolet and others..
+        mapCar.put(licensePlate, (V) car);
         
         
     }
 
     @Override
-    public void deleteCar(Object id) {
-        String licensePlate = getLicensePlate();
+    public void deleteCar(String licensePlate) {
+
+        if(!validateLicensePlate(licensePlate)){
+            licensePlate = getLicensePlate();
+            return;
+        }
         
         mapCar.remove(licensePlate);
         System.out.print("Removido o carro de placa: " + licensePlate);
@@ -83,7 +99,16 @@ public class CarMapDAO<K, V> implements ICarDAO{
                           ║                                      ║
                           ╚═══════════════════════════════════════════╝
                            """);
-        int brand = scan.nextInt();
+        int option = scan.nextInt();
+        switch(option){
+            case 1:
+                        System.out.println("\n╔═════════════════════════════════════════╗");
+                        System.out.println("║  DIGITE O MODELO                     ║");
+                        System.out.println("╚═══════════════════════════════════════════╝");
+                        System.out.print("Modelo: ");
+                        String model = scan.nextLine();
+                mapCar.replace(licensePlate, Chevrolet.set, newValue)
+        }
         //mapCar.replace(key, oldValue, newValue)
     }
 
@@ -97,38 +122,4 @@ public class CarMapDAO<K, V> implements ICarDAO{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-    public boolean validateLicensePlate(String licensePlate){
-
-        if(!mapCar.containsKey(licensePlate)){
-            return true;
-        } else {
-            System.out.println("Essa placa já esta cadastrada");
-            return false;
-        }
-          
-    }
-    
-    public String getLicensePlate(){
-        System.out.println("\n╔═══════════════════════════════════════════╗");
-        System.out.println("║  DIGITE A PLACA                          ║");
-        System.out.println("║  Formato antigo: ABC1234                 ║");
-        System.out.println("║  Formato Mercosul: ABC1D23               ║");
-        System.out.println("╚═══════════════════════════════════════════╝");
-        System.out.print("Placa: ");
-        String licensePlate = scan.nextLine().toUpperCase();
-        
-        if(mapCar.isEmpty()){
-            System.out.println("❌ Operação não pode ser concluida, não existe carro cadastrado");
-            
-        }
-        
-        
-        while(!validateLicensePlate(licensePlate)){
-            System.out.println("❌ Placa inválida! Use formato ABC1234 ou ABC1D23");
-            System.out.print("Placa: ");
-            licensePlate = scan.nextLine().toUpperCase();
-        }
-        
-        return licensePlate;
-    }
 }

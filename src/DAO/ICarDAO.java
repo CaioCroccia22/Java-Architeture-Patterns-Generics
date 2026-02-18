@@ -15,10 +15,10 @@ import java.util.List;
  * Here the ideia is any one car model can be this methods 
  * I am pass to generics, because in the future I can use another type to ID
  */
-public interface ICarDAO<T, ID> {
-    public void createCar(T entity);
+public interface ICarDAO<ID, T> {
+    public void createCar(ID id, T entity);
     public void deleteCar(ID id);
-    public void updateCar(T entity);
+    public void updateCar(ID id, T entity);
     public List<T> getAllCars();
-    public AbstractCar getCar(ID id);
+    public T getCar(ID id);
 }
