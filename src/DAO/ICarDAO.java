@@ -14,6 +14,8 @@ import java.util.List;
  * Here I will implement an interface to declare methods of data base
  * Here the ideia is any one car model can be this methods 
  * I am pass to generics, because in the future I can use another type to ID
+ * 
+ * The responsability of this code is allow what my database can do
  */
 public interface ICarDAO<ID, T> {
     public void createCar(ID id, T entity);

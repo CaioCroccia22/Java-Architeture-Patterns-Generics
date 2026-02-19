@@ -18,6 +18,8 @@ import java.util.Scanner;
  * Here Im creating this abstract class to implement a Map, that simulate a Database, this map will be used 
  * with generics types that are received on methods of generic interface 
  * I have tried to create a map with car types, however it isn´t a good implementetion 
+ * 
+ * the responsability of this code is defined how my database will persist data
  */
 public abstract class AbstractCarMapDAO<ID, T> implements ICarDAO<ID, T> {
     
@@ -28,6 +30,7 @@ public abstract class AbstractCarMapDAO<ID, T> implements ICarDAO<ID, T> {
     public void createCar(ID id, T entity) {
         if(database.containsKey(id)){
             System.out.print("Não é possível cadastrar uma placa já existente");
+            return;
         }
         
         database.put(id, entity);
@@ -60,7 +63,7 @@ public abstract class AbstractCarMapDAO<ID, T> implements ICarDAO<ID, T> {
     @Override
     public T getCar(ID id) {
         if(validateId(id)){
-            database.get(id);
+           return database.get(id);
         }
         System.out.println("❌ Carro não encontrado: " + id);
         return null;
@@ -69,15 +72,12 @@ public abstract class AbstractCarMapDAO<ID, T> implements ICarDAO<ID, T> {
     public boolean validateId(ID id){
         while(!database.containsKey(id)){
             System.out.println("❌ Placa inválida! Use formato ABC1234 ou ABC1D23");
-            System.out.print("Placa: ");
-            id = (ID) scan.nextLine().toUpperCase();
             return false;
         }
         return true;
     }
     
-    public ID getID(Object entity){
-        if(entity.getClass() == AbstractCar.class){
+    public ID getID(){
             System.out.println("\n╔═══════════════════════════════════════════╗");
             System.out.println("║  DIGITE A PLACA                          ║");
             System.out.println("║  Formato antigo: ABC1234                 ║");
@@ -92,8 +92,6 @@ public abstract class AbstractCarMapDAO<ID, T> implements ICarDAO<ID, T> {
             }
 
             return id;
-        }
-        return null;
     }
         
 }
