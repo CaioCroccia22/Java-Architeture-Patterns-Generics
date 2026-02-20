@@ -6,6 +6,8 @@ package DAO;
 
 import domain.AbstractCar;
 import domain.Chevrolet;
+import domain.Honda;
+import domain.Vw;
 import java.util.HashMap;
 import java.util.List;
 import java.lang.String;
@@ -31,6 +33,7 @@ public class CarMapDAO<ID, T> extends AbstractCarMapDAO<ID, T>{
                           ╚═══════════════════════════════════════════╝
                            """);
         int brand = scan.nextInt();
+        scan.nextLine();
         
         System.out.println("\n╔═══════════════════════════════════════════╗");
         System.out.println("║  DIGITE A PLACA                        ║");
@@ -59,7 +62,7 @@ public class CarMapDAO<ID, T> extends AbstractCarMapDAO<ID, T>{
         AbstractCar car = switch(brand){
             case 1 -> new Chevrolet(licensePlate, model, year, km);
             case 2 -> new Honda(licensePlate, model, year, km);
-            case 3 -> new VW(licensePlate, model, year, km);
+            case 3 -> new Vw(licensePlate, model, year, km);
             default -> throw new IllegalArgumentException("Marca inválida");
   
         };
@@ -104,12 +107,8 @@ public class CarMapDAO<ID, T> extends AbstractCarMapDAO<ID, T>{
         updateCar(id, (T) current);
     }
 
-    public List<T> getAllCars() {
-        return getAllCars();
-    }
-
-    @Override
-    public T getCar(ID id) {
+    public T searchCar() {
+        ID id = getID();
         return getCar(id);
     }
     

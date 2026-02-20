@@ -25,6 +25,7 @@ public abstract class AbstractCarMapDAO<ID, T> implements ICarDAO<ID, T> {
     
     Map<ID, T> database = new HashMap();
     Scanner scan = new Scanner(System.in);
+    String args[] = {};
 
     @Override
     public void createCar(ID id, T entity) {
@@ -34,6 +35,10 @@ public abstract class AbstractCarMapDAO<ID, T> implements ICarDAO<ID, T> {
         }
         
         database.put(id, entity);
+        if(database.containsKey(id)){
+            System.out.print("Adicionado com sucesso!!");
+            
+        }
         
     }
 
@@ -41,6 +46,7 @@ public abstract class AbstractCarMapDAO<ID, T> implements ICarDAO<ID, T> {
     public void deleteCar(ID id) {
         if(validateId(id)){
             database.remove(id);
+            System.out.println("Carro removido");
         }
     }
 
@@ -48,6 +54,7 @@ public abstract class AbstractCarMapDAO<ID, T> implements ICarDAO<ID, T> {
     public void updateCar(ID id, T entity) {
         if(validateId(id)){
             database.replace(id, database.get(id), entity);
+            System.out.println("Carro alterado com sucesso" + entity);
         }
     }
 
@@ -57,12 +64,16 @@ public abstract class AbstractCarMapDAO<ID, T> implements ICarDAO<ID, T> {
             System.out.println("Nenhum carro cadastrado");
             return new ArrayList<>();  
         }
-        return new ArrayList<>(database.values());
+        ArrayList<T> arr = new ArrayList<>(database.values());
+        System.out.println(arr);
+        return arr;
+        
     }
 
     @Override
     public T getCar(ID id) {
         if(validateId(id)){
+            System.out.println(database.get(id));
            return database.get(id);
         }
         System.out.println("❌ Carro não encontrado: " + id);
@@ -72,7 +83,7 @@ public abstract class AbstractCarMapDAO<ID, T> implements ICarDAO<ID, T> {
     public boolean validateId(ID id){
         while(!database.containsKey(id)){
             System.out.println("❌ Placa inválida! Use formato ABC1234 ou ABC1D23");
-            return false;
+            id = getID();
         }
         return true;
     }
@@ -83,8 +94,12 @@ public abstract class AbstractCarMapDAO<ID, T> implements ICarDAO<ID, T> {
             System.out.println("║  Formato antigo: ABC1234                 ║");
             System.out.println("║  Formato Mercosul: ABC1D23               ║");
             System.out.println("╚═══════════════════════════════════════════╝");
+
             System.out.print("Placa: ");
+            scan.nextLine();
+
             ID id = (ID) scan.nextLine().toUpperCase();
+            
 
             if(database.isEmpty()){
                 System.out.println("❌ Operação não pode ser concluida, não existe carro cadastrado");

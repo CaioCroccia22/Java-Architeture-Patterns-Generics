@@ -42,6 +42,11 @@ public abstract class AbstractCar {
             
         }
 
+    @Override
+    public String toString() {
+        return "AbstractCar{" + "licensePlate=" + licensePlate + ", model=" + model + ", year=" + year + ", km=" + km + '}';
+    }
+
         public String getLicensePlate() {
             return licensePlate;
         }
