@@ -46,7 +46,7 @@ public abstract class AbstractCarMapDAO<ID, T> implements ICarDAO<ID, T> {
     public void deleteCar(ID id) {
         if(validateId(id)){
             database.remove(id);
-            System.out.println("Carro removido");
+            System.out.println("Carro removido"  + "garagem atualmente" + database.toString());
         }
     }
 
@@ -96,7 +96,6 @@ public abstract class AbstractCarMapDAO<ID, T> implements ICarDAO<ID, T> {
             System.out.println("╚═══════════════════════════════════════════╝");
 
             System.out.print("Placa: ");
-            scan.nextLine();
 
             ID id = (ID) scan.nextLine().toUpperCase();
             

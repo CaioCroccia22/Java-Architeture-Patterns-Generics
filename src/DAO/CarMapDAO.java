@@ -32,8 +32,8 @@ public class CarMapDAO<ID, T> extends AbstractCarMapDAO<ID, T>{
                           ║                                      ║
                           ╚═══════════════════════════════════════════╝
                            """);
-        int brand = scan.nextInt();
-        scan.nextLine();
+        int brand = Integer.parseInt(scan.nextLine());
+
         
         System.out.println("\n╔═══════════════════════════════════════════╗");
         System.out.println("║  DIGITE A PLACA                        ║");
@@ -51,12 +51,12 @@ public class CarMapDAO<ID, T> extends AbstractCarMapDAO<ID, T>{
         System.out.println("║  DIGITE O ANO                          ║");
         System.out.println("╚══════════════════════════════════════════════╝");
         System.out.print("Ano: ");
-        int year = scan.nextInt();
+        int year = Integer.parseInt(scan.nextLine());
         
         System.out.println("\n╔═══════════════════════════════════════════╗");
         System.out.println("║  DIGITE OS KMS                       ║");
         System.out.println("╚═══════════════════════════════════════════╝");
-        float km = scan.nextInt();
+        float km = Integer.parseInt(scan.nextLine());
        
         
         AbstractCar car = switch(brand){
@@ -72,6 +72,7 @@ public class CarMapDAO<ID, T> extends AbstractCarMapDAO<ID, T>{
     
  
     public void removeCar() {
+
         ID id = getID();
         deleteCar(id);
     }
@@ -90,17 +91,17 @@ public class CarMapDAO<ID, T> extends AbstractCarMapDAO<ID, T>{
                           ║                                      ║
                           ╚═══════════════════════════════════════════╝
                            """);
-        int option = scan.nextInt();
+        int option = Integer.parseInt(scan.nextLine());
         switch(option){
             case 1:
                     System.out.println("Novo modelo:");
                     current.setModel(scan.nextLine());
                 case 2:
                     System.out.println("Digite o ano: (YYYY)");
-                    current.setYear(scan.nextInt());
+                    current.setYear(Integer.parseInt(scan.nextLine()));
                 case 3:
                     System.out.println("Digite o Km: ");
-                    current.setKm(scan.nextInt());
+                    current.setKm(Integer.parseInt(scan.nextLine()));
         }
                 
         

@@ -36,14 +36,14 @@ public class Main {
             
             
             
-            int option = scan.nextInt();
             //I put this to solve the bug that after entering with numerical, the nextLine() is skipped
-            scan.nextLine();
+
+            int option = (Integer.parseInt(scan.nextLine()));
             switch(option){
                 case 1-> app.ImplementCar();
                 case 2-> app.searchCar();
                 case 3-> app.updateCar();
-                case 4-> app.deleteCar(app);
+                case 4-> app.removeCar();
                 case 5->app.getAllCars();
                 default->System.exit(0);
             }

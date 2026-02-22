@@ -44,7 +44,7 @@ public abstract class AbstractCar {
 
     @Override
     public String toString() {
-        return "AbstractCar{" + "licensePlate=" + licensePlate + ", model=" + model + ", year=" + year + ", km=" + km + '}';
+        return "Carro: " + "licensePlate= " + licensePlate + ", model= " + model + ", year= " + year + ", km= " + km + "/n";
     }
 
         public String getLicensePlate() {
